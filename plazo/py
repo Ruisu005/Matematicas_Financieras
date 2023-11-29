@@ -1,0 +1,49 @@
+import math
+from math import log
+
+#tasa_interes = interes/100
+#numero_periodos_compuesto = log(monto/capital) / log(1 + tasa_interes/periodo_capitalizacion)
+#tasa_interes_conocida = tasa_interes/100
+#tasa_interes_desconocida = math.sqrt((1 + tasa_interes_conocida/periodo_capitalizacion)**periodo_capitalizacion) - 1 * periodo_capitalizacion_conocida
+
+#tasa_efectiva_equivalente = tasa_efectiva_equivalente/100
+#tasa_efectiva = ((1 + tasa_efectiva_equivalente/periodo_capitalizacion)**periodo_capitalizacion) - 1
+
+#tasa_capitalizable = (tasa_capitalizable/100) / periodo_capitalizacion
+#numero_de_rentas = log((monto/renta) * (tasa_capitalizable) / (1 + tasa_capitalizable) + 1) / log(1 + tasa_capitalizable)
+
+#rentaNueva = (monto * tasa_capitalizable) / (1 + tasa_capitalizable) * (1 + tasa_capitalizable**numero_rentas_calculado) - 1
+
+#nuevoMonto = renta_nueva_calculada * (1 + tasa_capitalizable) * (((1 + tasa_capitalizable)**numero_rentas_calculado) -1 / tasa_capitalizable)
+
+
+#tasa_capitalizable = (tasa_capitalizable/100) / periodo_capitalizacion
+#anualidad_vencida = -log(1 - (capital / renta) * (tasa_capitalizable)) / log(1 + tasa_capitalizable)
+#nuevaRenta = capital / ((1 - (1 + tasa_capitalizable)**-anualidad_vencida_calculada)/anualidad_vencida_calculada)
+
+import math
+
+def calcular_anualidad_vencida(capital, renta, tasa_capitalizable, periodo_capitalizacion):
+    tasa_capitalizable = (tasa_capitalizable / 100) / periodo_capitalizacion
+    anualidad_vencida = -math.log(1 - (capital / renta) * tasa_capitalizable) / math.log(1 + tasa_capitalizable)
+    return math.ceil(anualidad_vencida)
+
+def calcular_nueva_renta(capital, tasa_capitalizable, anualidad_vencida_calculada):
+    nueva_renta = capital / ((1 - (1 + tasa_capitalizable) ** -anualidad_vencida_calculada) / anualidad_vencida_calculada)
+    return nueva_renta
+
+# Obtener los valores necesarios para el cálculo
+capital = float(input("Ingrese el capital: "))
+renta = float(input("Ingrese la renta: "))
+tasa_capitalizable = float(input("Ingrese la tasa capitalizable (en porcentaje): "))
+periodo_capitalizacion = int(input("Ingrese el periodo de capitalización: "))
+
+# Calcular la anualidad vencida utilizando la fórmula proporcionada y redondearlo hacia arriba
+anualidad_vencida_calculada = calcular_anualidad_vencida(capital, renta, tasa_capitalizable, periodo_capitalizacion)
+
+# Calcular la nueva renta utilizando la fórmula proporcionada
+nueva_renta_calculada = calcular_nueva_renta(capital, tasa_capitalizable, anualidad_vencida_calculada)
+
+print(f"La anualidad vencida es: {anualidad_vencida_calculada}")
+print(f"La nueva renta es: {nueva_renta_calculada}")
+
